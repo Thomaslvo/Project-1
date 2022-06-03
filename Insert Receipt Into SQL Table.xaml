@@ -1,0 +1,508 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Insert_Receipt_Into_SQL_Table" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:bew="clr-namespace:BalaReva.Excel.WorkBook;assembly=BalaReva.Excel" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="In_Subtotal" Type="InArgument(x:Double)" />
+    <x:Property Name="In_OrderNumber" Type="InArgument(x:Int32)" />
+    <x:Property Name="CustomerID" Type="InArgument(x:Int32)" />
+    <x:Property Name="In_Quantity" Type="InArgument(x:Int32)" />
+    <x:Property Name="In_Keyword" Type="InArgument(x:String)" />
+    <x:Property Name="In_Price" Type="InArgument(x:Double)" />
+    <x:Property Name="In_ShoppingList" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_Beverages" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_CustomersDT" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_Seasonings" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_InvoicesDT" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_Commission" Type="InArgument(x:Double)" />
+    <x:Property Name="In_Earnings" Type="InArgument(x:Double)" />
+  </x:Members>
+  <this:Insert_Receipt_Into_SQL_Table.CustomerID>
+    <InArgument x:TypeArguments="x:Int32" />
+  </this:Insert_Receipt_Into_SQL_Table.CustomerID>
+  <this:Insert_Receipt_Into_SQL_Table.In_Beverages>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Insert_Receipt_Into_SQL_Table.In_Beverages>
+  <this:Insert_Receipt_Into_SQL_Table.In_InvoicesDT>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Insert_Receipt_Into_SQL_Table.In_InvoicesDT>
+  <this:Insert_Receipt_Into_SQL_Table.In_Commission>
+    <InArgument x:TypeArguments="x:Double" />
+  </this:Insert_Receipt_Into_SQL_Table.In_Commission>
+  <this:Insert_Receipt_Into_SQL_Table.In_Earnings>
+    <InArgument x:TypeArguments="x:Double" />
+  </this:Insert_Receipt_Into_SQL_Table.In_Earnings>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1560,6613</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Insert_Receipt_Into_SQL_Table_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="42">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>BalaReva.Excel.WorkBook</x:String>
+      <x:String>BalaReva.Excel.Base</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="37">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>BalaReva.Excel</AssemblyReference>
+      <AssemblyReference>BalaReva.Excel.Base</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Insert_Receipt_Into_SQL_Table" sap:VirtualizedContainerService.HintSize="705,6548" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="Customer_id" />
+      <Variable x:TypeArguments="x:Double" Name="Total" />
+      <Variable x:TypeArguments="x:String" Name="Keyword" />
+      <Variable x:TypeArguments="x:Int32" Name="Quantity" />
+      <Variable x:TypeArguments="x:Double" Name="Price" />
+      <Variable x:TypeArguments="sd:DataTable" Name="Receipt" />
+      <Variable x:TypeArguments="sd:DataTable" Name="CustomerExpenses" />
+      <Variable x:TypeArguments="sd:DataTable" Name="VendorInventory" />
+      <Variable x:TypeArguments="x:Double" Name="SumSubtotal" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="ServiceFee" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="TotalTax" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="TotalDue" />
+      <Variable x:TypeArguments="sd:DataTable" Name="ProfitReport" />
+      <Variable x:TypeArguments="sd:DataTable" Name="ProfitsHeaderDT" />
+      <Variable x:TypeArguments="x:String" Name="FirstName" />
+      <Variable x:TypeArguments="x:String" Name="LastName" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;G:\Revature Training\Myrepo\Thomas-Vo\Project 1\Project 1 Shopping Automation\CustomersID\1000\Order Numbers\&quot;+OrderNumber.ToString+&quot;.xlsx&quot;]" Name="FilePath" />
+      <Variable x:TypeArguments="x:String" Name="OrderNumber" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="663,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Shop For Pega Beverages.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="x:Int32" x:Key="Out_Quantity">
+          <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="In_Quantity" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="Out_Keyword">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="In_Keyword" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:Double" x:Key="Out_Price">
+          <mva:VisualBasicReference x:TypeArguments="x:Double" ExpressionText="In_Price" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_ShoppingList">
+          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="In_ShoppingList" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_Beverages">
+          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="In_Beverages" />
+        </OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="663,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Shop For Pega Seasonings.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="x:Double" x:Key="Out_Subtotal">
+          <mva:VisualBasicReference x:TypeArguments="x:Double" ExpressionText="In_Subtotal" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_Seasonings">
+          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="In_Seasonings" />
+        </OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="663,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Check Out.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="In_DBConnection" />
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="In_CustomersSQLDB" />
+        <OutArgument x:TypeArguments="x:Int32" x:Key="Out_OrderNumber">
+          <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="In_OrderNumber" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_CustomerDT">
+          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="In_CustomersDT" />
+        </OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[In_CustomersDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="663,300" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[Customer_id]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[convert.ToInt32(row(0))]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" ConnectionString="Data Source=thomaslongvo.database.windows.net;Initial Catalog=thomasDemoDB;User ID=Thomaslvo;Password=Gypsydog1!" DisplayName="Run query" sap:VirtualizedContainerService.HintSize="663,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_6" ProviderName="System.Data.SqlClient" Sql="INSERT INTO Orders([Order_Number],[Customer_id],[Order_Date],[Sub_Total])Values(@OrderNumber,@Customer_id,GETDATE(),@Total)">
+      <ui:ExecuteQuery.Parameters>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Customer_id">[Customer_id]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="Total">[In_Subtotal]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="OrderNumber">[In_OrderNumber]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="ServiceFee">[ServiceFee]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="TotalTax">[TotalTax]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="TotalDue">[TotalDue]</InArgument>
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="663,91" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Creating expense reports in Excel.&quot;]" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="663,260" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_5" InstanceCachePeriod="3000" WorkbookPath="VendorInventory.xlsx">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_12">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelReadRange Range="{x:Null}" AddHeaders="True" DataTable="[VendorInventory]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="Pega" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[In_ShoppingList]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="663,1116" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="item" />
+          </ActivityAction.Argument>
+          <Sequence sap:VirtualizedContainerService.HintSize="613,968" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[VendorInventory]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="571,876" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <If Condition="[(item(1).ToString)=(row(0).ToString)]" sap:VirtualizedContainerService.HintSize="521,728" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,580" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Keyword]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[item(1).ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[Quantity]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[convert.toInt32(item(2).ToString)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Double">[Price]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Double">[Double.Parse(row(3).ToString)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Double">[Total]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Double">[Quantity*Price]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" ConnectionString="Data Source=thomaslongvo.database.windows.net;Initial Catalog=thomasDemoDB;User ID=Thomaslvo;Password=Gypsydog1!" DisplayName="Run query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" ProviderName="System.Data.SqlClient" Sql="INSERT INTO Ordered_Items([Order_Number],[Product],[Quantity],[Price],[Total])Values(@OrderNumber,@Product,@Quantity,@Price,@Total)">
+                          <ui:ExecuteQuery.Parameters>
+                            <InArgument x:TypeArguments="x:Int32" x:Key="OrderNumber">[In_OrderNumber]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Product">[Keyword]</InArgument>
+                            <InArgument x:TypeArguments="x:Int32" x:Key="Quantity">[Quantity]</InArgument>
+                            <InArgument x:TypeArguments="x:Double" x:Key="Price">[Price]</InArgument>
+                            <InArgument x:TypeArguments="x:Double" x:Key="Total">[Total]</InArgument>
+                          </ui:ExecuteQuery.Parameters>
+                        </ui:ExecuteQuery>
+                      </Sequence>
+                    </If.Then>
+                  </If>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <bew:CreateWorkBook ExecutionResult="{x:Null}" FilePassword="{x:Null}" ModifyPassword="{x:Null}" ContinueOnError="False" Delay="3" DisplayName="Create WorkBook" FilePath="[&quot;G:\Revature Training\Myrepo\Thomas-Vo\Project 1\Project 1 Shopping Automation\CustomersID\1000\Order Numbers\&quot;+In_OrderNumber.ToString+&quot;&quot;]" sap:VirtualizedContainerService.HintSize="663,22" sap2010:WorkflowViewState.IdRef="CreateWorkBook_2" SheetName="Invoice" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="663,350" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_6" InstanceCachePeriod="3000" WorkbookPath="Customer Information.xlsx">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,241" sap2010:WorkflowViewState.IdRef="Sequence_13">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelWriteRange StartingCell="{x:Null}" AddHeaders="False" DataTable="[In_CustomersDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_3" SheetName="Sheet1" />
+            <ui:ExcelCopySheet DestinationFilePath="[&quot;G:\Revature Training\Myrepo\Thomas-Vo\Project 1\Project 1 Shopping Automation\CustomersID\1000\Order Numbers\&quot;+In_OrderNumber.ToString+&quot;&quot;]" DestinationSheetName="Invoice" DisplayName="Copy Sheet" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_1" SheetName="Invoices" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" ConnectionString="Data Source=thomaslongvo.database.windows.net;Initial Catalog=thomasDemoDB;User ID=Thomaslvo;Password=Gypsydog1!" DataTable="[Receipt]" DisplayName="Run query" sap:VirtualizedContainerService.HintSize="663,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_5" ProviderName="System.Data.SqlClient" Sql="SELECT * FROM Ordered_Items WHERE Order_Number = @In_OrderNumber">
+      <ui:ExecuteQuery.Parameters>
+        <InArgument x:TypeArguments="x:Int32" x:Key="In_OrderNumber">[In_OrderNumber]</InArgument>
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="663,804" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_4" InstanceCachePeriod="3000" WorkbookPath="[&quot;G:\Revature Training\Myrepo\Thomas-Vo\Project 1\Project 1 Shopping Automation\CustomersID\1000\Order Numbers\&quot;+In_OrderNumber.ToString+&quot;&quot;]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="418,695" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelWriteRange AddHeaders="False" DataTable="[Receipt]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="376,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="Invoice" StartingCell="A20" />
+            <ui:ExcelWriteCell Cell="E6" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="376,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="Invoice" Text="[In_OrderNumber.ToString]" />
+            <Sequence sap:VirtualizedContainerService.HintSize="376,349" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:ExcelReadCell Cell="E37" DisplayName="Read Cell" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadCell_1" SheetName="Invoice">
+                <ui:ExcelReadCell.Result>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[ServiceFee]</OutArgument>
+                </ui:ExcelReadCell.Result>
+              </ui:ExcelReadCell>
+              <ui:ExcelReadCell Cell="E39" DisplayName="Read Cell" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadCell_2" SheetName="Invoice">
+                <ui:ExcelReadCell.Result>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[TotalTax]</OutArgument>
+                </ui:ExcelReadCell.Result>
+              </ui:ExcelReadCell>
+              <ui:ExcelReadCell Cell="E41" DisplayName="Read Cell" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadCell_3" SheetName="Invoice">
+                <ui:ExcelReadCell.Result>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[TotalDue]</OutArgument>
+                </ui:ExcelReadCell.Result>
+              </ui:ExcelReadCell>
+            </Sequence>
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="663,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Updating Receipts into Databases...&quot;]" />
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" ConnectionString="Data Source=thomaslongvo.database.windows.net;Initial Catalog=thomasDemoDB;User ID=Thomaslvo;Password=Gypsydog1!" DisplayName="Run query" sap:VirtualizedContainerService.HintSize="663,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_7" ProviderName="System.Data.SqlClient" Sql="INSERT INTO Invoices([Order_Number],[Customer_id],[Order_Date],[Sub_Total],[Service_Fee],[Total_Tax],[Total_Due])Values(@OrderNumber,@Customer_id,GETDATE(),@Total,@ServiceFee,@TotalTax,@TotalDue)">
+      <ui:ExecuteQuery.Parameters>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Customer_id">[Customer_id]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="Total">[In_Subtotal]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="OrderNumber">[In_OrderNumber]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="ServiceFee">[ServiceFee]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="TotalTax">[TotalTax]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="TotalDue">[TotalDue]</InArgument>
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="663,91" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Preparing to email invoice to customer.&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="663,91" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Calculating and recording Profit Reports.&quot;]" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="663,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Profit Reports.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_InvoicesDT">[In_InvoicesDT]</OutArgument>
+        <OutArgument x:TypeArguments="x:Double" x:Key="Out_Commission">[In_Commission]</OutArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="In_OrderNumber">[In_OrderNumber]</InArgument>
+        <OutArgument x:TypeArguments="x:Double" x:Key="Out_Earnings">[In_Earnings]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" ConnectionString="Data Source=thomaslongvo.database.windows.net;Initial Catalog=thomasDemoDB;User ID=thomaslvo;Password=Gypsydog1!" DisplayName="Run query" sap:VirtualizedContainerService.HintSize="663,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_8" ProviderName="System.Data.SqlClient" Sql="INSERT INTO ProfitsReport([Order_Number],[Customer_id],[Total_Due],[Commission_Rate],[Earnings])Values(@OrderNumber,@CustomerID,@Total,@Commission,@Earnings)">
+      <ui:ExecuteQuery.Parameters>
+        <InArgument x:TypeArguments="x:Int32" x:Key="OrderNumber">[In_OrderNumber]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="CustomerID">[Customer_id]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="Total">[TotalDue]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="Commission">[In_Commission]</InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="Earnings">[In_Earnings]</InArgument>
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" ConnectionString="Data Source=thomaslongvo.database.windows.net;Initial Catalog=thomasDemoDB;User ID=thomaslvo;Password=Gypsydog1!" DataTable="[ProfitReport]" DisplayName="Run query" sap:VirtualizedContainerService.HintSize="663,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_9" ProviderName="System.Data.SqlClient" Sql="SELECT * FROM ProfitsReport where Order_Number=@In_OrderNumber">
+      <ui:ExecuteQuery.Parameters>
+        <InArgument x:TypeArguments="x:Int32" x:Key="In_OrderNumber">[In_OrderNumber]</InArgument>
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <bew:CreateWorkBook ExecutionResult="{x:Null}" FilePassword="{x:Null}" ModifyPassword="{x:Null}" ContinueOnError="False" Delay="3" DisplayName="Create WorkBook" FilePath="[&quot;G:\Revature Training\Myrepo\Thomas-Vo\Project 1\Project 1 Shopping Automation\CustomersID\1000\Profit Reports\&quot;+In_OrderNumber.ToString+&quot;&quot;]" sap:VirtualizedContainerService.HintSize="663,22" sap2010:WorkflowViewState.IdRef="CreateWorkBook_3" SheetName="Invoice" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="663,223" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_8" InstanceCachePeriod="3000" WorkbookPath="Profit and Loss Statement.xlsx">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_16">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelCopySheet DestinationFilePath="[&quot;G:\Revature Training\Myrepo\Thomas-Vo\Project 1\Project 1 Shopping Automation\CustomersID\1000\Profit Reports\&quot;+In_OrderNumber.ToString+&quot;&quot;]" DestinationSheetName="Earnings" DisplayName="Copy Sheet" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_2" SheetName="Sheet1" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="663,288" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_7" InstanceCachePeriod="3000" WorkbookPath="[&quot;G:\Revature Training\Myrepo\Thomas-Vo\Project 1\Project 1 Shopping Automation\CustomersID\1000\Profit Reports\&quot;+In_OrderNumber.ToString+&quot;&quot;]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_15">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelWriteRange AddHeaders="False" DataTable="[ProfitReport]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_5" SheetName="Earnings" StartingCell="C13" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[In_CustomersDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="663,400" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_17">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[FirstName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[row(1).ToString]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[LastName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[row(2).ToString]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="663,91" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[In_OrderNumber.ToString]" />
+    <Sequence DisplayName="Email_Invoice" sap:VirtualizedContainerService.HintSize="663,368" sap2010:WorkflowViewState.IdRef="Sequence_18">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[OrderNumber]" />
+      <ui:SendOutlookMail Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Account="thomaslongvo12983@gmail.com" Body="[FirstName+&quot; &quot;+LastName+&quot;, &quot;+&quot; Thank You for shopping with RoSa.  Your invoice has been attached.  If you have any questions please feel free to contact our customer service team at 832.458.2678.  Have a great day!&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="False" IsDraft="False" Subject="[&quot;Your  invoice #&quot;+&quot; &quot; +In_OrderNumber.ToString+&quot; &quot; +&quot;has Been Processed.&quot;]" To="thomaslongvo12983@gmail.com">
+        <ui:SendOutlookMail.Files>
+          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+            <InArgument x:TypeArguments="x:String">[FilePath]</InArgument>
+          </scg:List>
+        </ui:SendOutlookMail.Files>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:SendOutlookMail>
+    </Sequence>
+  </Sequence>
+</Activity>
