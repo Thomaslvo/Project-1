@@ -1,6 +1,6 @@
 RoSa Shopping Automation Project 1 
 
-Functionalities
+##Functionalities
 
 - Buys items on Pega platform after downloading customers shopping lists via email.
   - Creates an expense and profit report for each customer which will be emailed upon completion of order.
