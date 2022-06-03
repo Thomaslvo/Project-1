@@ -20,4 +20,4 @@ RoSA is your robotic shopping assistant, here to help you automate your shopping
 - Hit the Debug File button to begin automation.
 
 # License
-- This project has the following license
+- This project has the following license https://github.com/Thomaslvo/Project-1/blob/main/LICENSE.
